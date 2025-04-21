@@ -29,11 +29,11 @@ const Technology = () => {
 
   const specifications = [
     {
-      title: "Cell Chemistry",
-      description: "Advanced lithium-ion technology with proprietary electrolyte formulation for enhanced performance and longevity.",
+      title: "Energy Efficiency",
+      description: "Optimized power delivery system with intelligent energy management for maximum performance and minimal waste.",
       stats: [
-        { label: "Energy Density", value: "260 Wh/kg" },
-        { label: "Cycle Life", value: "2000+" }
+        { label: "Energy Recovery", value: "95%" },
+        { label: "Power Efficiency", value: "98%" }
       ]
     },
     {
@@ -57,70 +57,70 @@ const Technology = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow pt-16">
-        <div className="pt-24 pb-12 bg-gray-50">
+        <div className="pt-24 pb-12 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             {/* Header Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
               <h1 className="text-4xl font-bold text-gray-900 mb-4">Advanced Battery Technology</h1>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="text-gray-600 max-w-2xl mx-auto text-lg">
                 Pioneering the future of energy storage with cutting-edge innovation and sustainable solutions.
               </p>
             </motion.div>
 
             {/* Features Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
               {features.map((feature, index) => (
                 <motion.div
                   key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors"
                 >
-                  <div className="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                    <feature.icon className="w-6 h-6 text-blue-600" />
+                  <div className="bg-white w-12 h-12 rounded-lg flex items-center justify-center mb-4 shadow-sm">
+                    <feature.icon className="w-6 h-6 text-gray-900" />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <p className="text-gray-600 text-sm">{feature.description}</p>
                 </motion.div>
               ))}
             </div>
 
             {/* Innovation Section */}
-            <div className="grid md:grid-cols-2 gap-8 mb-16">
+            <div className="grid md:grid-cols-2 gap-12 mb-20">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
-                className="bg-white rounded-xl shadow-sm p-8"
+                className="bg-gray-50 rounded-lg p-8"
               >
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Innovation at Our Core</h2>
-                <p className="text-gray-600 mb-8">
+                <p className="text-gray-600 mb-8 text-sm">
                   Our battery technology represents the pinnacle of energy storage innovation. 
                   We combine advanced materials science with sophisticated engineering to create 
                   batteries that set new standards for performance and reliability.
                 </p>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="flex items-center gap-3">
-                    <Wifi className="w-5 h-5 text-blue-600" />
-                    <span className="text-gray-700">Remote Monitoring</span>
+                    <Wifi className="w-5 h-5 text-gray-900" />
+                    <span className="text-gray-700 text-sm">Remote Monitoring</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <ThermometerSun className="w-5 h-5 text-blue-600" />
-                    <span className="text-gray-700">Thermal Control</span>
+                    <ThermometerSun className="w-5 h-5 text-gray-900" />
+                    <span className="text-gray-700 text-sm">Thermal Control</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Leaf className="w-5 h-5 text-blue-600" />
-                    <span className="text-gray-700">Eco-Friendly</span>
+                    <Leaf className="w-5 h-5 text-gray-900" />
+                    <span className="text-gray-700 text-sm">Eco-Friendly</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <BarChart className="w-5 h-5 text-blue-600" />
-                    <span className="text-gray-700">Performance Analytics</span>
+                    <BarChart className="w-5 h-5 text-gray-900" />
+                    <span className="text-gray-700 text-sm">Performance Analytics</span>
                   </div>
                 </div>
               </motion.div>
@@ -129,18 +129,22 @@ const Technology = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
-                className="rounded-xl overflow-hidden shadow-sm"
+                className="relative rounded-2xl overflow-hidden bg-white p-8 shadow-sm"
               >
-                <img 
-                  src="/images/tech/techh.jpg" 
-                  alt="Battery Technology" 
-                  className="w-full h-full object-cover"
-                />
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white opacity-50 rounded-2xl" />
+                <div className="relative flex items-center justify-center h-[500px]">
+                  <img 
+                    src="/images/batteries/Front.png" 
+                    alt="Battery Technology" 
+                    className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-300 rounded-xl"
+                  />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent rounded-b-2xl" />
               </motion.div>
             </div>
 
             {/* Technical Specifications */}
-            <div className="bg-white rounded-xl shadow-sm p-8">
+            <div className="bg-gray-50 rounded-lg p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-8">Technical Specifications</h2>
               <div className="grid md:grid-cols-3 gap-8">
                 {specifications.map((spec, index) => (
@@ -149,14 +153,15 @@ const Technology = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="bg-white rounded-lg p-6 shadow-sm"
                   >
                     <h3 className="text-xl font-semibold text-gray-900 mb-3">{spec.title}</h3>
-                    <p className="text-gray-600 mb-4">{spec.description}</p>
+                    <p className="text-gray-600 mb-4 text-sm">{spec.description}</p>
                     <div className="space-y-2">
                       {spec.stats.map(stat => (
                         <div key={stat.label} className="flex justify-between items-center py-2 border-b border-gray-100">
-                          <span className="text-gray-600">{stat.label}</span>
-                          <span className="font-semibold text-gray-900">{stat.value}</span>
+                          <span className="text-gray-600 text-sm">{stat.label}</span>
+                          <span className="font-semibold text-gray-900 text-sm">{stat.value}</span>
                         </div>
                       ))}
                     </div>

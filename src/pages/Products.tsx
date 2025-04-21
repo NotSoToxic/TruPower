@@ -1,128 +1,112 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Battery, Zap, Search } from 'lucide-react';
+import { Battery, Zap, Shield, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { batteries } from '../data/batteries';
 import Footer from '../components/Footer';
 
 const Products = () => {
-  const [selectedCategory, setSelectedCategory] = useState<'all' | '2-Wheeler' | '3-Wheeler'>('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  // Get the first 3-Wheeler battery
+  const battery = batteries.find(battery => battery.category === '3-Wheeler');
 
-  const filteredBatteries = batteries.filter(battery => {
-    const matchesCategory = selectedCategory === 'all' || battery.category === selectedCategory;
-    const matchesSearch = battery.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         battery.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  if (!battery) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <div className="flex-grow pt-16">
+          <div className="pt-24 pb-12 bg-gray-50">
+            <div className="max-w-7xl mx-auto px-4 text-center">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">No Battery Found</h1>
+              <p className="text-gray-600 text-base">Please check back later for our 3-Wheeler battery solution.</p>
+            </div>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white">
       <div className="flex-grow pt-16">
-        <div className="pt-24 pb-12 bg-gray-50">
+        <div className="pt-24 pb-12">
           <div className="max-w-7xl mx-auto px-4">
             {/* Header */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-12"
+              className="text-center mb-16"
             >
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Products</h1>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                Discover our range of high-performance battery solutions for electric vehicles.
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">3-Wheeler Battery Solution</h1>
+              <p className="text-gray-600 text-base max-w-2xl mx-auto leading-relaxed">
+                Premium battery solution engineered for optimal performance in electric three-wheelers.
               </p>
             </motion.div>
 
-            {/* Filters */}
-            <div className="mb-8 space-y-4 md:space-y-0 md:flex md:items-center md:justify-between">
-              <div className="flex gap-4">
-                <button
-                  onClick={() => setSelectedCategory('all')}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    selectedCategory === 'all' 
-                      ? 'bg-blue-600 text-white' 
-                      : 'bg-white text-gray-600 hover:bg-gray-50'
-                  }`}
-                >
-                  All Products
-                </button>
-                <button
-                  onClick={() => setSelectedCategory('2-Wheeler')}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    selectedCategory === '2-Wheeler' 
-                      ? 'bg-blue-600 text-white' 
-                      : 'bg-white text-gray-600 hover:bg-gray-50'
-                  }`}
-                >
-                  2-Wheeler Solutions
-                </button>
-                <button
-                  onClick={() => setSelectedCategory('3-Wheeler')}
-                  className={`px-4 py-2 rounded-lg transition-colors ${
-                    selectedCategory === '3-Wheeler' 
-                      ? 'bg-blue-600 text-white' 
-                      : 'bg-white text-gray-600 hover:bg-gray-50'
-                  }`}
-                >
-                  3-Wheeler Solutions
-                </button>
-              </div>
-
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search products..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full md:w-64 pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              </div>
-            </div>
-
-            {/* Products Grid */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {filteredBatteries.map((battery, index) => (
-                <motion.div
-                  key={battery.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-white rounded-xl shadow-sm overflow-hidden flex flex-col"
-                >
+            {/* Single Product Display */}
+            <div className="max-w-5xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="group bg-white rounded-2xl overflow-hidden"
+              >
+                <div className="grid lg:grid-cols-2 gap-12">
                   {/* Image Container */}
-                  <div className="h-72 overflow-hidden">
+                  <div className="relative aspect-square">
                     <img
                       src={battery.image}
                       alt={battery.name}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                   
-                  <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">{battery.name}</h3>
-                    <p className="text-sm text-gray-600 mb-6 flex-grow">{battery.description}</p>
-                    <div className="space-y-3 mb-6">
-                      <div className="flex items-center gap-2">
-                        <Battery className="w-4 h-4 text-blue-600" />
-                        <span className="text-sm text-gray-700">{battery.capacity}</span>
+                  {/* Content */}
+                  <div className="flex flex-col justify-center p-8 lg:p-0">
+                    <h3 className="text-3xl font-bold text-gray-900 mb-6">{battery.name}</h3>
+                    <p className="text-gray-600 text-base mb-8 leading-relaxed">{battery.description}</p>
+                    
+                    <div className="grid grid-cols-2 gap-6 mb-8">
+                      <div className="flex items-center gap-3">
+                        <div className="bg-gray-50 p-2 rounded-lg">
+                          <Battery className="w-5 h-5 text-gray-600" />
+                        </div>
+                        <div>
+                          <span className="text-sm text-gray-500">Capacity</span>
+                          <p className="font-medium text-base text-gray-900">{battery.capacity}</p>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Zap className="w-4 h-4 text-blue-600" />
-                        <span className="text-sm text-gray-700">{battery.voltage}</span>
+                      <div className="flex items-center gap-3">
+                        <div className="bg-gray-50 p-2 rounded-lg">
+                          <Zap className="w-5 h-5 text-gray-600" />
+                        </div>
+                        <div>
+                          <span className="text-sm text-gray-500">Voltage</span>
+                          <p className="font-medium text-base text-gray-900">{battery.voltage}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="bg-gray-50 p-2 rounded-lg">
+                          <Shield className="w-5 h-5 text-gray-600" />
+                        </div>
+                        <div>
+                          <span className="text-sm text-gray-500">Safety Rating</span>
+                          <p className="font-medium text-base text-gray-900">{battery.safetyRating}</p>
+                        </div>
                       </div>
                     </div>
+
                     <Link
                       to={`/battery/${battery.id}`}
-                      className="inline-flex items-center justify-center w-full px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                      className="inline-flex items-center justify-center w-full px-6 py-4 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors group"
                     >
-                      Learn More
+                      <span className="font-medium text-base">View Details</span>
+                      <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
-                </motion.div>
-              ))}
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>

@@ -1,347 +1,197 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Zap, Battery, Leaf, Check } from 'lucide-react';
-import { useParams, Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight, Maximize2, Battery, Zap, Shield, Thermometer, ArrowRight } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
 import { batteries } from '../data/batteries';
-import { ChevronLeft } from 'lucide-react';
 import Footer from '../components/Footer';
 
 const BatteryDetails = () => {
   const { id } = useParams();
-  const [battery, setBattery] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    application: '',
-    quantity: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const battery = batteries.find(b => b.id === id);
+  const [selectedImage, setSelectedImage] = useState(0);
 
-  useEffect(() => {
-    // Find the battery based on ID
-    const foundBattery = batteries.find(b => b.id === id);
-    setBattery(foundBattery || null);
-    setLoading(false);
-  }, [id]);
+  const images = [
+    { src: battery?.image, alt: 'Front View', label: 'Front View' },
+    { src: '/images/batteries/Top.png', alt: 'Top View', label: 'Top View' },
+    { src: '/images/batteries/Back.png', alt: 'Back View', label: 'Back View' }
+  ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        application: '',
-        quantity: '',
-        message: ''
-      });
-    } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      setSelectedImage(prev => (prev === 0 ? images.length - 1 : prev - 1));
+    } else if (e.key === 'ArrowRight') {
+      setSelectedImage(prev => (prev === images.length - 1 ? 0 : prev + 1));
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   if (!battery) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Battery Not Found</h2>
-          <p className="text-gray-600">The requested battery details could not be found.</p>
+      <div className="flex flex-col min-h-screen">
+        <div className="flex-grow pt-16">
+          <div className="pt-24 pb-12 bg-gray-50">
+            <div className="max-w-7xl mx-auto px-4 text-center">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">Battery Not Found</h1>
+              <Link to="/products" className="text-blue-600 hover:text-blue-700 text-base">
+                Return to Products
+              </Link>
+            </div>
+          </div>
         </div>
+        <Footer />
       </div>
     );
   }
 
-  const getApplications = () => {
-    if (battery.category === '2-Wheeler') {
-      return [
-        {
-          title: 'Electric Scooters',
-          description: 'Perfect for personal and shared mobility solutions.'
-        },
-        {
-          title: 'Electric Motorcycles',
-          description: 'High-performance power for electric motorcycles.'
-        }
-      ];
-    } else {
-      return [
-        {
-          title: 'Electric Rickshaws',
-          description: 'Ideal for commercial three-wheeler applications.'
-        },
-        {
-          title: 'Electric Cargo Vehicles',
-          description: 'Perfect for last-mile delivery and logistics.'
-        }
-      ];
-    }
-  };
+  const specifications = [
+    { icon: Battery, label: 'Capacity', value: battery.capacity },
+    { icon: Zap, label: 'Voltage', value: battery.voltage },
+    { icon: Shield, label: 'Safety Rating', value: battery.safetyRating },
+    { icon: Thermometer, label: 'Operating Temperature', value: battery.operatingTemperature }
+  ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white">
       <div className="flex-grow pt-16">
-        <div className="pt-24 pb-12 min-h-screen bg-gray-50">
+        <div className="pt-24 pb-12">
           <div className="max-w-7xl mx-auto px-4">
-            {/* Back to Products Button */}
-            <Link 
-              to="/products" 
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-8 group"
-            >
-              <ChevronLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
-              <span>Back to Products</span>
+            {/* Back Button */}
+            <Link to="/products" className="inline-flex items-center text-gray-500 hover:text-gray-900 transition-colors mb-12 group">
+              <ChevronLeft className="w-5 h-5 mr-2 transition-transform group-hover:-translate-x-1" />
+              <span className="text-base font-medium">Back to Products</span>
             </Link>
 
-            {/* Header with Single Image */}
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="flex flex-col justify-center"
-              >
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">{battery.name}</h1>
-                <p className="text-xl text-gray-600">
-                  {battery.description}
-                </p>
-              </motion.div>
+            {/* Main Content */}
+            <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+              {/* Image Gallery */}
+              <div className="space-y-8">
+                {/* Main Image */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative aspect-square bg-white rounded-2xl overflow-hidden group"
+                >
+                  <img
+                    src={images[selectedImage].src}
+                    alt={images[selectedImage].alt}
+                    className="w-full h-full object-contain p-12 transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <button className="absolute top-6 right-6 p-3 bg-white/90 rounded-xl shadow-sm hover:bg-white transition-colors">
+                    <Maximize2 className="w-6 h-6 text-gray-600" />
+                  </button>
+                  {/* Navigation Arrows */}
+                  <button
+                    onClick={() => setSelectedImage(prev => (prev === 0 ? images.length - 1 : prev - 1))}
+                    className="absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-white/90 rounded-xl shadow-sm hover:bg-white transition-colors"
+                  >
+                    <ChevronLeft className="w-6 h-6 text-gray-600" />
+                  </button>
+                  <button
+                    onClick={() => setSelectedImage(prev => (prev === images.length - 1 ? 0 : prev + 1))}
+                    className="absolute right-6 top-1/2 -translate-y-1/2 p-3 bg-white/90 rounded-xl shadow-sm hover:bg-white transition-colors"
+                  >
+                    <ChevronRight className="w-6 h-6 text-gray-600" />
+                  </button>
+                  {/* View Indicator */}
+                  <div className="absolute bottom-6 left-6 right-6 flex justify-center">
+                    <span className="px-4 py-2 bg-white/90 rounded-xl text-sm font-medium text-gray-600">
+                      {images[selectedImage].label}
+                    </span>
+                  </div>
+                </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="rounded-xl overflow-hidden shadow-sm"
-              >
-                <img
-                  src={battery.image}
-                  alt={battery.name}
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-            </div>
-
-            {/* Specifications */}
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-white rounded-xl shadow-sm p-8"
-              >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Specifications</h2>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                    <span className="text-gray-600">Capacity</span>
-                    <span className="font-semibold text-gray-900">{battery.capacity}</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                    <span className="text-gray-600">Voltage</span>
-                    <span className="font-semibold text-gray-900">{battery.voltage}</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3 border-b border-gray-100">
-                    <span className="text-gray-600">Cycle Life</span>
-                    <span className="font-semibold text-gray-900">{battery.cycleLife}</span>
-                  </div>
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-600">Charging Time</span>
-                    <span className="font-semibold text-gray-900">{battery.chargingTime}</span>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-white rounded-xl shadow-sm p-8"
-              >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Safety Features</h2>
-                <div className="space-y-4">
-                  {battery.safetyFeatures.map((feature: string, index: number) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <Shield className="w-5 h-5 text-blue-600 mt-1" />
-                      <span className="text-gray-700">{feature}</span>
-                    </div>
+                {/* Thumbnails */}
+                <div className="flex gap-4 justify-center">
+                  {images.map((image, index) => (
+                    <motion.button
+                      key={index}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => setSelectedImage(index)}
+                      className={`flex-none w-24 h-24 rounded-xl overflow-hidden border-2 transition-colors ${
+                        selectedImage === index ? 'border-gray-900' : 'border-gray-100'
+                      }`}
+                    >
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    </motion.button>
                   ))}
                 </div>
-              </motion.div>
-            </div>
-
-            {/* Applications */}
-            <div className="bg-white rounded-xl shadow-sm p-8 mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Applications</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {getApplications().map((app, index) => (
-                  <div key={index} className="p-6 border rounded-lg hover:border-blue-200 transition-colors">
-                    <h3 className="font-semibold text-gray-900 mb-3">{app.title}</h3>
-                    <p className="text-gray-600">{app.description}</p>
-                  </div>
-                ))}
               </div>
-            </div>
 
-            {/* Enquiry Form */}
-            <div className="max-w-2xl mx-auto">
-              <div className="bg-white rounded-xl shadow-sm p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Send Enquiry</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                    </div>
-                  </div>
+              {/* Product Info */}
+              <div className="space-y-10">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <h1 className="text-4xl font-bold text-gray-900 mb-6">{battery.name}</h1>
+                  <p className="text-gray-600 text-base leading-relaxed">{battery.description}</p>
+                </motion.div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Phone
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
+                {/* Specifications */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="grid grid-cols-2 gap-6"
+                >
+                  {specifications.map((spec) => (
+                    <div key={spec.label} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-center gap-4 mb-3">
+                        <div className="bg-gray-50 p-3 rounded-lg">
+                          <spec.icon className="w-6 h-6 text-gray-600" />
+                        </div>
+                        <div>
+                          <span className="text-sm text-gray-500">{spec.label}</span>
+                          <p className="text-base font-semibold text-gray-900">{spec.value}</p>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Company
-                      </label>
-                      <input
-                        type="text"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                    </div>
-                  </div>
+                  ))}
+                </motion.div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Application
-                      </label>
-                      <select
-                        name="application"
-                        value={formData.application}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      >
-                        <option value="">Select Application</option>
-                        {getApplications().map((app, index) => (
-                          <option key={index} value={app.title}>
-                            {app.title}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Quantity
-                      </label>
-                      <input
-                        type="number"
-                        name="quantity"
-                        value={formData.quantity}
-                        onChange={handleChange}
-                        required
-                        min="1"
-                        className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                    </div>
-                  </div>
+                {/* Safety Features */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300"
+                >
+                  <h2 className="text-2xl font-semibold text-gray-900 mb-8">Safety Features</h2>
+                  <ul className="space-y-6">
+                    {battery.safetyFeatures.map((feature, index) => (
+                      <li key={index} className="flex items-start gap-4">
+                        <div className="w-2 h-2 rounded-full bg-gray-900 mt-2" />
+                        <span className="text-gray-600 text-base">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={4}
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    ></textarea>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`w-full py-3 px-4 rounded-lg text-white font-medium transition-colors ${
-                      isSubmitting
-                        ? 'bg-blue-400 cursor-not-allowed'
-                        : 'bg-blue-600 hover:bg-blue-700'
-                    }`}
+                {/* Enquiry Button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center justify-center w-full px-8 py-5 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-colors group"
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Enquiry'}
-                  </button>
-
-                  {submitStatus === 'success' && (
-                    <div className="text-green-600 text-center">
-                      Thank you for your enquiry. We'll get back to you soon!
-                    </div>
-                  )}
-                  {submitStatus === 'error' && (
-                    <div className="text-red-600 text-center">
-                      Something went wrong. Please try again.
-                    </div>
-                  )}
-                </form>
+                    <span className="font-medium text-base">Request Information</span>
+                    <ArrowRight className="w-6 h-6 ml-3 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </motion.div>
               </div>
             </div>
           </div>

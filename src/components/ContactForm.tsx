@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
-import { Send } from 'lucide-react';
+import { Send, AlertCircle } from 'lucide-react';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -9,28 +9,83 @@ const ContactForm = () => {
     email: '',
     message: ''
   });
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
+  const validateForm = () => {
+    const newErrors = {
+      name: '',
+      email: '',
+      message: ''
+    };
+    let isValid = true;
+
+    // Name validation
+    if (formData.name.length < 2) {
+      newErrors.name = 'Name must be at least 2 characters long';
+      isValid = false;
+    } else if (!/^[a-zA-Z\s]*$/.test(formData.name)) {
+      newErrors.name = 'Name can only contain letters and spaces';
+      isValid = false;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+      isValid = false;
+    }
+
+    // Message validation
+    if (formData.message.length < 10) {
+      newErrors.message = 'Message must be at least 10 characters long';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
     try {
       await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        'service_hfy4gtq',
+        'template_q1wh0lc',
         formData,
-        'YOUR_PUBLIC_KEY'
+        'nk1ZZwdR1WkFqw1yn'
       );
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
+      setErrors({ name: '', email: '', message: '' });
     } catch (error) {
       console.error('Error sending message:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error when user starts typing
+    if (errors[name as keyof typeof errors]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
@@ -49,13 +104,25 @@ const ContactForm = () => {
         <input
           type="text"
           id="name"
+          name="name"
           value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="input-field"
+          onChange={handleChange}
+          className={`input-field ${errors.name ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''}`}
           required
           placeholder="Your name"
         />
+        {errors.name && (
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-red-500 text-sm flex items-center gap-1"
+          >
+            <AlertCircle className="w-4 h-4" />
+            {errors.name}
+          </motion.p>
+        )}
       </div>
+
       <div className="space-y-2">
         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
           Email
@@ -63,27 +130,51 @@ const ContactForm = () => {
         <input
           type="email"
           id="email"
+          name="email"
           value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="input-field"
+          onChange={handleChange}
+          className={`input-field ${errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''}`}
           required
           placeholder="your@email.com"
         />
+        {errors.email && (
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-red-500 text-sm flex items-center gap-1"
+          >
+            <AlertCircle className="w-4 h-4" />
+            {errors.email}
+          </motion.p>
+        )}
       </div>
+
       <div className="space-y-2">
         <label htmlFor="message" className="block text-sm font-medium text-gray-700">
           Message
         </label>
         <textarea
           id="message"
+          name="message"
           value={formData.message}
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          onChange={handleChange}
           rows={4}
-          className="input-field resize-none"
+          className={`input-field resize-none ${errors.message ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''}`}
           required
           placeholder="Your message..."
         />
+        {errors.message && (
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-red-500 text-sm flex items-center gap-1"
+          >
+            <AlertCircle className="w-4 h-4" />
+            {errors.message}
+          </motion.p>
+        )}
       </div>
+
       <motion.button
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
