@@ -122,6 +122,7 @@ const Home = () => {
                     Explore Products
                   </motion.button>
                 </Link>
+                <Link to="/technology">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -129,6 +130,7 @@ const Home = () => {
                 >
                   Learn More
                 </motion.button>
+                </Link>
               </div>
             </motion.div>
           </div>
