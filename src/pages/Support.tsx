@@ -10,7 +10,7 @@ const Support = () => {
       icon: Clock,
       title: "24/7 Support",
       description: "Round-the-clock technical assistance for all your battery needs",
-      contact: "XXXXXXXXXX",
+      contact: "7337345560",
       isPhone: true
     },
     {
