@@ -151,101 +151,103 @@ const Home = () => {
             </motion.div>
 
             <div className="relative">
-              <div 
-                ref={scrollContainerRef}
-                className="flex overflow-x-hidden gap-6 pb-6 -mx-4 px-4 scroll-smooth"
-              >
-                {[
-                  {
-                    icon: Shield,
-                    title: "Premium Quality",
-                    description: "ISO certified manufacturing with advanced quality control systems and premium materials.",
-                    features: [
-                      "ISO 9001:2015 certified",
-                      "Advanced quality control",
-                      "Premium materials",
-                      "Extended warranty"
-                    ]
-                  },
-                  {
-                    icon: Zap,
-                    title: "Innovation",
-                    description: "State-of-the-art technology with smart BMS integration and fast charging capabilities.",
-                    features: [
-                      "Smart BMS integration",
-                      "Fast charging",
-                      "Thermal management",
-                      "Real-time monitoring"
-                    ]
-                  },
-                  {
-                    icon: Headphones,
-                    title: "24/7 Support",
-                    description: "Round-the-clock technical support with on-site assistance and maintenance services.",
-                    features: [
-                      "24/7 technical support",
-                      "On-site assistance",
-                      "Maintenance services",
-                      "Training & guidance"
-                    ]
-                  },
-                  {
-                    icon: ShieldCheck,
-                    title: "Safety First",
-                    description: "Comprehensive safety measures and certifications ensuring reliable operation.",
-                    features: [
-                      "Safety certifications",
-                      "Protection systems",
-                      "Regular audits",
-                      "Testing protocols"
-                    ]
-                  },
-                  {
-                    icon: Battery,
-                    title: "Performance",
-                    description: "Optimized battery solutions delivering consistent and reliable power output.",
-                    features: [
-                      "High energy density",
-                      "Long cycle life",
-                      "Efficient delivery",
-                      "Temperature stability"
-                    ]
-                  },
-                  {
-                    icon: Leaf,
-                    title: "Sustainability",
-                    description: "Eco-friendly solutions with minimal environmental impact and maximum efficiency.",
-                    features: [
-                      "Recyclable materials",
-                      "Energy efficiency",
-                      "Zero emissions",
-                      "Green packaging"
-                    ]
-                  }
-                ].map((item, index) => (
-                  <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex-none w-[350px] bg-white rounded-2xl shadow-sm p-8 hover:shadow-md transition-all duration-300 border border-gray-100"
-                  >
-                    <div className="bg-blue-50 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
-                      <item.icon className="h-6 w-6 text-blue-600" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-4 text-gray-900">{item.title}</h3>
-                    <p className="text-gray-600 mb-6">{item.description}</p>
-                    <ul className="space-y-3">
-                      {item.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center gap-3 text-gray-700">
-                          <Check className="w-5 h-5 text-blue-600" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                ))}
+              <div className="px-4">
+                <div 
+                  ref={scrollContainerRef}
+                  className="flex overflow-x-auto gap-6 pb-6 scroll-smooth snap-x snap-mandatory"
+                >
+                  {[
+                    {
+                      icon: Shield,
+                      title: "Premium Quality",
+                      description: "ISO certified manufacturing with advanced quality control systems and premium materials.",
+                      features: [
+                        "ISO 9001:2015 certified",
+                        "Advanced quality control",
+                        "Premium materials",
+                        "Extended warranty"
+                      ]
+                    },
+                    {
+                      icon: Zap,
+                      title: "Innovation",
+                      description: "State-of-the-art technology with smart BMS integration and fast charging capabilities.",
+                      features: [
+                        "Smart BMS integration",
+                        "Fast charging",
+                        "Thermal management",
+                        "Real-time monitoring"
+                      ]
+                    },
+                    {
+                      icon: Headphones,
+                      title: "24/7 Support",
+                      description: "Round-the-clock technical support with on-site assistance and maintenance services.",
+                      features: [
+                        "24/7 technical support",
+                        "On-site assistance",
+                        "Maintenance services",
+                        "Training & guidance"
+                      ]
+                    },
+                    {
+                      icon: ShieldCheck,
+                      title: "Safety First",
+                      description: "Comprehensive safety measures and certifications ensuring reliable operation.",
+                      features: [
+                        "Safety certifications",
+                        "Protection systems",
+                        "Regular audits",
+                        "Testing protocols"
+                      ]
+                    },
+                    {
+                      icon: Battery,
+                      title: "Performance",
+                      description: "Optimized battery solutions delivering consistent and reliable power output.",
+                      features: [
+                        "High energy density",
+                        "Long cycle life",
+                        "Efficient delivery",
+                        "Temperature stability"
+                      ]
+                    },
+                    {
+                      icon: Leaf,
+                      title: "Sustainability",
+                      description: "Eco-friendly solutions with minimal environmental impact and maximum efficiency.",
+                      features: [
+                        "Recyclable materials",
+                        "Energy efficiency",
+                        "Zero emissions",
+                        "Green packaging"
+                      ]
+                    }
+                  ].map((item, index) => (
+                    <motion.div
+                      key={item.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="flex-none w-[280px] sm:w-[350px] bg-white rounded-2xl shadow-sm p-8 hover:shadow-md transition-all duration-300 border border-gray-100 snap-center"
+                    >
+                      <div className="bg-blue-50 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
+                        <item.icon className="h-6 w-6 text-blue-600" />
+                      </div>
+                      <h3 className="text-xl font-semibold mb-4 text-gray-900">{item.title}</h3>
+                      <p className="text-gray-600 mb-6">{item.description}</p>
+                      <ul className="space-y-3">
+                        {item.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-center gap-3 text-gray-700">
+                            <Check className="w-5 h-5 text-blue-600" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
 
               {/* Scroll Buttons */}
@@ -285,6 +287,12 @@ const Home = () => {
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Have questions about our products or services? We're here to help.
               </p>
+              <div className="mt-6">
+                <p className="text-lg font-semibold text-gray-900">For Enquiry Contact:</p>
+                <a href="tel:+919876543210" className="text-blue-600 hover:text-blue-800 text-xl font-medium">
+                  +91 7428400552
+                </a>
+              </div>
             </motion.div>
             
             <motion.div
