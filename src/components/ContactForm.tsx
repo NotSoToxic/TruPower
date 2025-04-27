@@ -6,49 +6,57 @@ import { Send, AlertCircle } from 'lucide-react';
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
+    company: '',
     email: '',
+    phone: '',
     message: ''
   });
   const [errors, setErrors] = useState({
     name: '',
+    company: '',
     email: '',
+    phone: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
+  const validateField = (name: string, value: string) => {
+    switch (name) {
+      case 'name':
+        if (value.length < 2) return 'Name must be at least 2 characters long';
+        if (!/^[a-zA-Z\s]*$/.test(value)) return 'Name can only contain letters and spaces';
+        return '';
+      case 'company':
+        if (value.length < 2) return 'Company name must be at least 2 characters long';
+        return '';
+      case 'email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) return 'Please enter a valid email address';
+        return '';
+      case 'phone':
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(value.replace(/\D/g, ''))) return 'Please enter a valid 10-digit phone number';
+        return '';
+      case 'message':
+        if (value.length < 10) return 'Message must be at least 10 characters long';
+        return '';
+      default:
+        return '';
+    }
+  };
+
   const validateForm = () => {
     const newErrors = {
-      name: '',
-      email: '',
-      message: ''
+      name: validateField('name', formData.name),
+      company: validateField('company', formData.company),
+      email: validateField('email', formData.email),
+      phone: validateField('phone', formData.phone),
+      message: validateField('message', formData.message)
     };
-    let isValid = true;
-
-    // Name validation
-    if (formData.name.length < 2) {
-      newErrors.name = 'Name must be at least 2 characters long';
-      isValid = false;
-    } else if (!/^[a-zA-Z\s]*$/.test(formData.name)) {
-      newErrors.name = 'Name can only contain letters and spaces';
-      isValid = false;
-    }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-      isValid = false;
-    }
-
-    // Message validation
-    if (formData.message.length < 10) {
-      newErrors.message = 'Message must be at least 10 characters long';
-      isValid = false;
-    }
-
+    
     setErrors(newErrors);
-    return isValid;
+    return !Object.values(newErrors).some(error => error !== '');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -69,8 +77,8 @@ const ContactForm = () => {
         'nk1ZZwdR1WkFqw1yn'
       );
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-      setErrors({ name: '', email: '', message: '' });
+      setFormData({ name: '', company: '', email: '', phone: '', message: '' });
+      setErrors({ name: '', company: '', email: '', phone: '', message: '' });
     } catch (error) {
       console.error('Error sending message:', error);
       setSubmitStatus('error');
@@ -83,10 +91,9 @@ const ContactForm = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Clear error when user starts typing
-    if (errors[name as keyof typeof errors]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
+    // Real-time validation
+    const error = validateField(name, value);
+    setErrors(prev => ({ ...prev, [name]: error }));
   };
 
   return (
@@ -99,7 +106,7 @@ const ContactForm = () => {
     >
       <div className="space-y-2">
         <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-          Name
+          Name <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -124,8 +131,34 @@ const ContactForm = () => {
       </div>
 
       <div className="space-y-2">
+        <label htmlFor="company" className="block text-sm font-medium text-gray-700">
+          Company Name <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          value={formData.company}
+          onChange={handleChange}
+          className={`input-field ${errors.company ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''}`}
+          required
+          placeholder="Your company name"
+        />
+        {errors.company && (
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-red-500 text-sm flex items-center gap-1"
+          >
+            <AlertCircle className="w-4 h-4" />
+            {errors.company}
+          </motion.p>
+        )}
+      </div>
+
+      <div className="space-y-2">
         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-          Email
+          Email <span className="text-red-500">*</span>
         </label>
         <input
           type="email"
@@ -150,8 +183,34 @@ const ContactForm = () => {
       </div>
 
       <div className="space-y-2">
+        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+          Phone Number <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          className={`input-field ${errors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : ''}`}
+          required
+          placeholder="10-digit phone number"
+        />
+        {errors.phone && (
+          <motion.p
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-red-500 text-sm flex items-center gap-1"
+          >
+            <AlertCircle className="w-4 h-4" />
+            {errors.phone}
+          </motion.p>
+        )}
+      </div>
+
+      <div className="space-y-2">
         <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-          Message
+          Message <span className="text-red-500">*</span>
         </label>
         <textarea
           id="message"

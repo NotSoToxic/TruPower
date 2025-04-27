@@ -110,7 +110,7 @@ const Support = () => {
                     </span>
                   </summary>
                   <p className="mt-4 px-4 text-gray-600">
-                    Our batteries come with a standard 8-year warranty covering manufacturing defects and capacity degradation below 70%.
+                    Our batteries come with a standard 3-year warranty covering manufacturing defects and capacity degradation below 70%.
                   </p>
                 </details>
 
@@ -134,7 +134,7 @@ const Support = () => {
                     </span>
                   </summary>
                   <p className="mt-4 px-4 text-gray-600">
-                    Under normal operating conditions, our batteries maintain over 80% capacity for 10+ years or 2000+ charging cycles.
+                    Under normal operating conditions, our batteries maintain over 80% capacity for 5+ years or 1000+ charging cycles.
                   </p>
                 </details>
               </div>
