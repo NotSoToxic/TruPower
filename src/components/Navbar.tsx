@@ -10,9 +10,11 @@ const Navbar = () => {
 
   const navLinks = [
     { path: '/', label: 'Home' },
+    { path: '/about', label: 'About' },
     { path: '/products', label: 'Products' },
     { path: '/technology', label: 'Technology' },
     { path: '/sustainability', label: 'Sustainability' },
+    { path: '/policy', label: 'Policy' },
     { path: '/support', label: 'Support' }
   ];
 
