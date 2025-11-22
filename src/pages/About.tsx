@@ -153,7 +153,7 @@ const About = () => {
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Leasing Solutions</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Flexible battery leasing programs through our Pointo Network, making electric vehicle 
+                  Flexible battery leasing programs through our Dealer Network, making electric vehicle 
                   adoption affordable with structured EMI plans and comprehensive support.
                 </p>
               </motion.div>
