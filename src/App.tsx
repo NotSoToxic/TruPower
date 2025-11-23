@@ -10,13 +10,15 @@ import Sustainability from './pages/Sustainability';
 import Support from './pages/Support';
 import BatteryDetails from './pages/BatteryDetails';
 import Policy from './pages/Policy';
+import { StatsProvider } from './context/StatsContext';
 
 const App = () => {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
-        <Navbar />
-        <Routes>
+        <StatsProvider>
+          <Navbar />
+          <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
@@ -34,6 +36,7 @@ const App = () => {
             </div>
           } />
         </Routes>
+        </StatsProvider>
       </div>
     </Router>
   );
