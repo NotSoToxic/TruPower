@@ -23,19 +23,6 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
     { id: 'income', value: 30, suffix: '%+', label: 'Increased income of drivers' }
   ]);
 
-  const setStatValue = (id: string, newValue: number) => {
-    setStats((s) => {
-      const next = s.map((st) => (st.id === id ? { ...st, value: newValue } : st));
-      // enforce constraint: customers >= batteries
-      const batteriesVal = next.find((t) => t.id === 'batteries')?.value ?? 0;
-      const customersIdx = next.findIndex((t) => t.id === 'customers');
-      if (customersIdx >= 0 && next[customersIdx].value < batteriesVal) {
-        next[customersIdx] = { ...next[customersIdx], value: batteriesVal };
-      }
-      return next;
-    });
-  };
-
   // Optional: simulate light growth over time to demonstrate dynamism.
   useEffect(() => {
     const interval = setInterval(() => {
@@ -48,21 +35,52 @@ export const StatsProvider = ({ children }: { children: ReactNode }) => {
           if (st.id === 'income') return { ...st, value: Math.min(st.value + 0.2, 999) };
           return st;
         });
-        // enforce constraint after incremental update
-        const batteriesVal = updated.find((t) => t.id === 'batteries')?.value ?? 0;
+        // enforce constraints:
+        // 1) `batteries` must be strictly greater than 35% of `customers` (dealers)
+        // 2) `customers` must remain strictly greater than `batteries`
+        // Adjust values iteratively until both constraints hold.
+        const batteriesIdx = updated.findIndex((t) => t.id === 'batteries');
         const customersIdx = updated.findIndex((t) => t.id === 'customers');
-        if (customersIdx >= 0 && updated[customersIdx].value < batteriesVal) {
-          updated[customersIdx] = { ...updated[customersIdx], value: batteriesVal };
+        const getVal = (idx: number) => (idx >= 0 ? updated[idx].value : 0);
+        let bVal = getVal(batteriesIdx);
+        let cVal = getVal(customersIdx);
+
+        // iterate a few times to converge adjustments (should stabilize quickly)
+        for (let i = 0; i < 5; i++) {
+          // batteries must be strictly greater than 35% of customers
+          const minBatteries = Math.floor(cVal * 0.35) + 1;
+          if (bVal < minBatteries) bVal = minBatteries;
+
+          // customers must be strictly greater than batteries
+          if (cVal <= bVal) cVal = bVal + 1;
+        }
+
+        if (batteriesIdx >= 0) {
+          updated[batteriesIdx] = { ...updated[batteriesIdx], value: bVal };
+        }
+        if (customersIdx >= 0) {
+          updated[customersIdx] = { ...updated[customersIdx], value: cVal };
         }
         return updated;
       });
-    }, 15000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
-  return <StatsContext.Provider value={{ stats, setStatValue }}>{children}</StatsContext.Provider>;
-};
+  const setStatValue = (id: string, newValue: number) => {
+    setStats((prev) => {
+      const updated = prev.map((st) => (st.id === id ? { ...st, value: newValue } : st));
+      return updated;
+    });
+  };
+
+  return (
+    <StatsContext.Provider value={{ stats, setStatValue }}>
+      {children}
+    </StatsContext.Provider>
+  );
+}
 
 export const useStats = () => {
   const ctx = useContext(StatsContext);
