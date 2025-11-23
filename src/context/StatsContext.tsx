@@ -16,9 +16,9 @@ const StatsContext = createContext<StatsContextValue | undefined>(undefined);
 
 export const StatsProvider = ({ children }: { children: ReactNode }) => {
   const [stats, setStats] = useState<Stat[]>([
-    { id: 'batteries', value: 12, suffix: 'K+', label: 'EV batteries deployed' },
+    { id: 'batteries', value: 22, suffix: 'K+', label: 'EV batteries deployed' },
     // ensure initial customers >= batteries
-    { id: 'customers', value: 12, suffix: 'K+', label: 'Happy customers' },
+    { id: 'customers', value: 12, suffix: 'K+', label: 'Dealers' },
     { id: 'area', value: 2, suffix: 'K+', label: 'Area Served' },
     { id: 'income', value: 30, suffix: '%+', label: 'Increased income of drivers' }
   ]);

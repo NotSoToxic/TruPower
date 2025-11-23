@@ -1,9 +1,7 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Battery, Users, Target, Lightbulb, Award, Globe, Leaf, Zap } from 'lucide-react';
 import Footer from '../components/Footer';
-import StatCard from '../components/StatCard';
-import { useStats } from '../context/StatsContext';
+// Stats removed from About: StatCard/useStats are no longer used here
 
 const About = () => {
   const values = [
@@ -271,35 +269,7 @@ const About = () => {
             </div>
           </div>
         </section>
-        {/* Trusted by Dealers / Stats Section (styled to match theme) */}
-        <section className="py-16 bg-gray-50">
-          <div className="max-w-7xl mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center mb-6"
-            >
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">Trusted by Indian EV Dealers</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">Trusted across dealer networks and by operators nationwide — a partner for reliable battery deployments and dealer-first support.</p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-              {useStats().stats.map((stat) => (
-                <motion.div
-                  key={stat.id}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
-                >
-                  <StatCard value={stat.value} suffix={stat.suffix} label={stat.label} />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Trusted-by-dealers stats removed from About page; now only on Home */}
 
         {/* Contact Section */}
         <section className="py-16 bg-blue-600 text-white">
