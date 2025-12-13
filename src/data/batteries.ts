@@ -72,7 +72,7 @@ export const batteries: Battery[] = [
       'High-quality electrolyte',
       'Thermal-resistant electrolyte'
     ],
-    image: '/images/batteries/Front.png',
+    image: '/images/batteries/front.jpg',
     safetyRating: 'IP68',
     operatingTemperature: '-10°C to 60°C'
   },

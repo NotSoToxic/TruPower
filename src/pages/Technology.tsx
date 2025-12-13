@@ -134,7 +134,7 @@ const Technology = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white opacity-50 rounded-2xl" />
                 <div className="relative flex items-center justify-center h-[500px]">
                   <img 
-                    src="/images/batteries/Front.png" 
+                    src="/images/batteries/front.jpg" 
                     alt="Battery Technology" 
                     className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-300 rounded-xl"
                   />
