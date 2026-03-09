@@ -72,7 +72,7 @@ const Contact = () => {
                   <Phone className="w-6 h-6 text-blue-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Phone</h3>
-                <p className="text-gray-600">+91 XXXXXXXXXX</p>
+                <p className="text-gray-600">+91 7428489023</p>
               </motion.div>
 
               <motion.div
@@ -85,7 +85,7 @@ const Contact = () => {
                   <Mail className="w-6 h-6 text-blue-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Email</h3>
-                <p className="text-gray-600">energy@strategyzinc.com</p>
+                <p className="text-gray-600">service@trupower.co.in</p>
               </motion.div>
 
               <motion.div
@@ -98,7 +98,7 @@ const Contact = () => {
                   <MapPin className="w-6 h-6 text-blue-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Location</h3>
-                <p className="text-gray-600">Mumbai, Maharashtra</p>
+                <p className="text-gray-600">Indore, Madhya Pradesh</p>
               </motion.div>
             </div>
 
