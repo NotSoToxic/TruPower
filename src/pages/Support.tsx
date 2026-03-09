@@ -10,14 +10,14 @@ const Support = () => {
       icon: Clock,
       title: "24/7 Support",
       description: "Round-the-clock technical assistance for all your battery needs",
-      contact: "7337345560",
+      contact: "7428489023",
       isPhone: true
     },
     {
       icon: Mail,
       title: "Email Support",
       description: "Get detailed assistance via email",
-      contact: "energy@strategyzinc.com",
+      contact: "service@trupower.co.in",
       isPhone: false
     }
   ];
