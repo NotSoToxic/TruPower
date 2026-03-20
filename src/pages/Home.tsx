@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Battery, Zap, Shield, Headphones, ShieldCheck, Check, Leaf, ChevronLeft, ChevronRight } from 'lucide-react';
-import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
 import StatCard from '../components/StatCard';
+import { HeroSection } from '../components/ui/hero-section-shadcnui';
+import { ContactPage } from '../components/ui/contact-page';
 import { useStats } from '../context/StatsContext';
-import { Link } from 'react-router-dom';
 
 const plans = [
   {
@@ -101,24 +101,7 @@ const Home: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow pt-16">
         {/* Hero Section */}
-        <section className="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-white">
-          <div className="max-w-7xl mx-auto px-4">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-center mb-16">
-              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 leading-tight">
-                Powering the Future of <span className="text-blue-600">Electric Mobility</span>
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mt-4">Advanced EV battery solutions for a sustainable tomorrow</p>
-              <div className="flex justify-center gap-4 mt-8">
-                <Link to="/products">
-                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="btn-primary">Explore Products</motion.button>
-                </Link>
-                <Link to="/technology">
-                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="px-6 py-2 rounded-full border border-gray-300 hover:border-blue-500 hover:text-blue-600 transition-all duration-200">Learn More</motion.button>
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <HeroSection />
 
         {/* Why Choose Us Section (carousel) */}
         <section className="py-24 bg-white">
@@ -188,73 +171,10 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* Contact Section */}
+        {/* Get In Touch Section */}
         <section className="py-24 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Get in Touch</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">Have questions about our products or services? We're here to help.</p>
-              <div className="mt-6">
-                <p className="text-lg font-semibold text-gray-900">For Enquiry Contact:</p>
-                <a href="tel:+919876543210" className="text-blue-600 hover:text-blue-800 text-xl font-medium">+91 7428400552</a>
-              </div>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
-              <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="p-12">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-8">Send us a Message</h3>
-                  <ContactForm />
-                </div>
-
-                <div className="bg-gray-50 p-12 border-l border-gray-100">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-8">Visit Us</h3>
-                  <div className="space-y-10">
-                    <div className="flex items-start gap-4">
-                      <div className="bg-white p-3 rounded-xl shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-gray-900 mb-2">Corporate Office</h4>
-                        <p className="text-gray-600 leading-relaxed">Abiroo Strategyz Technologies Private Limited<br />WeWork HQ27, B-660, Sushant Lok Phase I<br />Sector 27, Gurgaon<br />Haryana 122009</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4">
-                      <div className="bg-white p-3 rounded-xl shadow-sm">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-                      </div>
-                      <div>
-                        <h4 className="font-medium text-gray-900 mb-2">Regional Office</h4>
-                        <p className="text-gray-600 leading-relaxed">Abiroo Strategyz Technologies Private Limited<br />WeWork Forum, Bannerghatta Rd<br />Arekere Village, Begur Hobli<br />Bengaluru, Karnataka 560076</p>
-                      </div>
-                    </div>
-
-                    <div className="space-y-6">
-                      <div className="flex items-start gap-4">
-                        <div className="bg-white p-3 rounded-xl shadow-sm">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                        </div>
-                        <div>
-                          <h4 className="font-medium text-gray-900 mb-1">Email</h4>
-                          <p className="text-gray-600">enquiry@trupower.co.in</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-4">
-                        <div className="bg-white p-3 rounded-xl shadow-sm">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        </div>
-                        <div>
-                          <h4 className="font-medium text-gray-900 mb-1">Business Hours</h4>
-                          <p className="text-gray-600">Monday - Friday: <br /> 9:00 AM - 6:00 PM<br /> Weekends: Closed</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            <ContactPage heading="Get in Touch" subheading="Contact the support team at TruPower." />
           </div>
         </section>
       </div>

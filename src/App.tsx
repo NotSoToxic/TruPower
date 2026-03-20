@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import Products from './pages/Products';
-import ContactForm from './components/ContactForm';
+import Contact from './pages/Contact';
 import Technology from './pages/Technology';
 import Sustainability from './pages/Sustainability';
 import Support from './pages/Support';
@@ -27,14 +27,7 @@ const App = () => {
           <Route path="/sustainability" element={<Sustainability />} />
           <Route path="/support" element={<Support />} />
           <Route path="/policy" element={<Policy />} />
-          <Route path="/contact" element={
-            <div className="pt-24 pb-12">
-              <div className="max-w-7xl mx-auto px-4">
-                <h1 className="text-4xl font-bold text-center mb-12">Contact Us</h1>
-                <ContactForm />
-              </div>
-            </div>
-          } />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         </StatsProvider>
       </div>

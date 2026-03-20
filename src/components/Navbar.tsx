@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Battery, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +15,8 @@ const Navbar = () => {
     { path: '/technology', label: 'Technology' },
     { path: '/sustainability', label: 'Sustainability' },
     { path: '/policy', label: 'Policy' },
-    { path: '/support', label: 'Support' }
+    { path: '/support', label: 'Support' },
+    { path: '/contact', label: 'Contact' }
   ];
 
   useEffect(() => {
