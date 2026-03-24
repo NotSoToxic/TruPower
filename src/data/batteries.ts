@@ -1,0 +1,121 @@
+export interface Battery {
+  id: string;
+  name: string;
+  category: '2-Wheeler' | '3-Wheeler' | 'Inverter';
+  description: string;
+  capacity: string;
+  voltage: string;
+  cycleLife: string;
+  chargingTime: string;
+  safetyFeatures: string[];
+  image: string;
+  safetyRating: string;
+  operatingTemperature: string;
+}
+
+export const batteries: Battery[] = [
+  {
+    id: '3w-51.2v-105ah',
+    name: '51.2V 105Ah 3-Wheeler Battery',
+    category: '3-Wheeler',
+    description: 'Heavy-duty battery pack designed for electric rickshaws. Delivers reliable power and extended range for commercial applications.',
+    capacity: '5.376 kWh',
+    voltage: '51.2V',
+    cycleLife: '1500+ cycles',
+    chargingTime: '4-6 hours',
+    safetyFeatures: [
+      'Industrial-grade thermal management',
+      'Advanced short circuit protection',
+      'IP68 water resistance',
+      'Smart BMS with monitoring',
+      'High-temperature resistance',
+      'Water-Proof',
+      'Laser-welded terminal',
+      'High-quality electrolyte',
+      'Thermal-resistant electrolyte'
+    ],
+    image: '/images/batteries/tejas.png',
+    safetyRating: 'IP68',
+    operatingTemperature: '-10°C to 60°C'
+  },
+  {
+    id: 'inv-12.8v-100ah',
+    name: '12.8V 100Ah Inverter Battery',
+    category: 'Inverter',
+    description: 'TRU-PW-0001 Lithium Iron Phosphate (LiFePO4) battery pack. Lightweight (14kg) and compact, perfect for inverters and power backup with zero maintenance required.',
+    capacity: '1.28 kWh',
+    voltage: '12.8V',
+    cycleLife: '> 3500 cycles @ 80% DOD',
+    chargingTime: 'Fast Charging',
+    safetyFeatures: [
+      'Built-in multiple protection mechanisms',
+      'Zero maintenance required',
+      'Eco-Friendly (No toxic materials)',
+      'High energy conversion efficiency',
+      'Lightweight & Compact Design'
+    ],
+    image: '/images/batteries/trupw0001.png',
+    safetyRating: 'IP68',
+    operatingTemperature: 'Standard'
+  },
+  {
+    id: 'inv-25.6v-100ah',
+    name: '25.6V 100Ah Inverter Battery',
+    category: 'Inverter',
+    description: 'TRU-PW-0002 Lithium Iron Phosphate (LiFePO4) battery pack. Durable (26.5kg) design, built for inverters and power backup with zero maintenance required.',
+    capacity: '2.56 kWh',
+    voltage: '25.6V',
+    cycleLife: '> 3500 cycles @ 80% DOD',
+    chargingTime: 'Fast Charging',
+    safetyFeatures: [
+      'Built-in multiple protection mechanisms',
+      'Zero maintenance required',
+      'Eco-Friendly (No toxic materials)',
+      'High energy conversion efficiency',
+      'Lightweight & Compact Design'
+    ],
+    image: '/images/batteries/100Ah 25.6V/1.png',
+    safetyRating: 'IP68',
+    operatingTemperature: 'Standard'
+  },
+  // {
+  //   id: '2w-48v-50ah',
+  //   name: '48V 50Ah 2-Wheeler Battery',
+  //   category: '2-Wheeler',
+  //   description: 'Compact and efficient battery pack ideal for light electric scooters. Offers excellent range and quick charging capabilities.',
+  //   capacity: '2.4 kWh',
+  //   voltage: '48V',
+  //   cycleLife: '2000+ cycles',
+  //   chargingTime: '3-4 hours',
+  //   safetyFeatures: [
+  //     'Thermal protection system',
+  //     'Short circuit protection',
+  //     'IP65 water resistance',
+  //     'Basic BMS integration',
+  //     'Overcharge protection',
+  //     'Shock absorption'
+  //   ],
+  //   image: '/images/batteries/bat-2q.jpg'
+  // },
+  // {
+  //   id: '3w-96v-200ah',
+  //   name: '96V 200Ah 3-Wheeler Battery',
+  //   category: '3-Wheeler',
+  //   description: 'Premium battery pack for high-performance electric rickshaws and commercial vehicles. Offers maximum power output and extended service life.',
+  //   capacity: '19.2 kWh',
+  //   voltage: '96V',
+  //   cycleLife: '1500+ cycles',
+  //   chargingTime: '8-9 hours',
+  //   safetyFeatures: [
+  //     'Enterprise-grade thermal management',
+  //     'Multi-stage protection system',
+  //     'IP68+ water resistance',
+  //     'Advanced BMS with diagnostics',
+  //     'Comprehensive safety protocols',
+  //     'Military-grade vibration resistance'
+  //   ],
+  //   image: '/images/batteries/bat-3q.jpg'
+  // }
+];
+
+export const categories = ['2-Wheeler', '3-Wheeler', 'Inverter'];
