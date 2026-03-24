@@ -49,7 +49,7 @@ export function ContactPage({
         <div className="absolute right-0 top-10 h-72 w-72 rounded-full bg-cyan-200/40 blur-3xl" />
       </div>
 
-      <div className="mx-auto max-w-6xl border-x border-gray-200 bg-white/60 backdrop-blur-sm">
+      <div className="mx-auto max-w-6xl border-y sm:border-x border-gray-200 bg-white/60 backdrop-blur-sm">
         <div className="px-4 pb-6 pt-16 text-center md:px-6">
           <h2 className="mb-4 text-3xl font-bold text-gray-900 lg:text-4xl">{heading}</h2>
           <p className="mx-auto mb-5 max-w-2xl text-gray-600">{subheading}</p>
@@ -64,7 +64,7 @@ export function ContactPage({
           >
             <a
               href={`mailto:${APP_EMAIL}`}
-              className="text-base font-medium hover:underline"
+              className="text-base font-medium hover:underline break-all"
             >
               {APP_EMAIL}
             </a>
@@ -75,7 +75,7 @@ export function ContactPage({
             title="Office"
             description="Drop by our office for a chat."
           >
-            <span className="text-base font-medium">
+            <span className="text-base font-medium break-words">
               WeWork HQ27, Sushant Lok Phase I, Sector 27, Gurgaon, Haryana
             </span>
           </Box>
@@ -89,7 +89,7 @@ export function ContactPage({
               <div className="flex items-center gap-x-2">
                 <a
                   href={`tel:${APP_PHONE}`}
-                  className="block text-base font-medium hover:underline"
+                  className="block text-base font-medium hover:underline break-all"
                 >
                   {APP_PHONE}
                 </a>
@@ -98,7 +98,7 @@ export function ContactPage({
               <div className="mt-2 flex items-center gap-x-2">
                 <a
                   href={`tel:${APP_PHONE_2}`}
-                  className="block text-base font-medium hover:underline"
+                  className="block text-base font-medium hover:underline break-all"
                 >
                   {APP_PHONE_2}
                 </a>

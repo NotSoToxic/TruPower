@@ -66,8 +66,8 @@ const Technology = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-20"
             >
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">Advanced Battery Technology</h1>
-              <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Advanced Battery Technology</h1>
+              <p className="text-gray-600 max-w-2xl mx-auto text-base sm:text-lg">
                 Pioneering the future of energy storage with cutting-edge innovation and sustainable solutions.
               </p>
             </motion.div>
@@ -92,7 +92,7 @@ const Technology = () => {
             </div>
 
             {/* Innovation Section */}
-            <div className="grid md:grid-cols-2 gap-12 mb-20">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-20">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -105,7 +105,7 @@ const Technology = () => {
                   We combine advanced materials science with sophisticated engineering to create 
                   batteries that set new standards for performance and reliability.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div className="flex items-center gap-3">
                     <Wifi className="w-5 h-5 text-gray-900" />
                     <span className="text-gray-700 text-sm">Remote Monitoring</span>
@@ -132,7 +132,7 @@ const Technology = () => {
                 className="relative rounded-2xl overflow-hidden bg-white p-8 shadow-sm"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white opacity-50 rounded-2xl" />
-                <div className="relative flex items-center justify-center h-[500px]">
+                <div className="relative flex items-center justify-center h-72 sm:h-96 md:h-[500px]">
                   <img 
                     src="/images/batteries/Front.png" 
                     alt="Battery Technology" 

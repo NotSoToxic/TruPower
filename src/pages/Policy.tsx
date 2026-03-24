@@ -423,7 +423,7 @@ const Policy = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-12"
             >
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">Policies & Legal</h1>
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Policies & Legal</h1>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Important information about our policies, terms, and your rights as a TruPower customer.
               </p>
@@ -434,21 +434,21 @@ const Policy = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex flex-wrap justify-center gap-4 mb-8"
+              className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8"
             >
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  className={`flex items-center gap-2 px-3 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium transition-all duration-200 ${
                     activeTab === tab.id
                       ? 'bg-blue-600 text-white shadow-md'
                       : 'bg-white text-gray-600 hover:text-blue-600 hover:bg-blue-50 shadow-sm'
                   }`}
                 >
                   <tab.icon className="w-4 h-4" />
-                  <span className="hidden sm:inline">{tab.label}</span>
-                  <span className="sm:hidden">{tab.label.split(' ')[0]}</span>
+                  <span className="text-sm sm:text-base hidden sm:inline">{tab.label}</span>
+                  <span className="text-sm sm:hidden">{tab.label.split(' ')[0]}</span>
                 </button>
               ))}
             </motion.div>
@@ -459,7 +459,7 @@ const Policy = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="bg-white rounded-xl shadow-sm p-8 lg:p-12"
+              className="bg-white rounded-xl shadow-sm p-4 sm:p-6 lg:p-12"
             >
               {renderContent()}
             </motion.div>

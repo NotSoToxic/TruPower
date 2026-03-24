@@ -104,15 +104,15 @@ const Home: React.FC = () => {
         <HeroSection />
 
         {/* Why Choose Us Section (carousel) */}
-        <section className="py-24 bg-white">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Choose Us?</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Why Choose Us?</h2>
               <p className="text-gray-600 max-w-2xl mx-auto">We combine cutting-edge technology with sustainable practices to deliver the best in EV battery solutions.</p>
             </motion.div>
 
             <div className="relative">
-              <div className="px-4">
+              <div className="px-1 sm:px-4">
                 <div ref={scrollContainerRef} className="flex overflow-x-auto gap-6 pb-6 scroll-smooth snap-x snap-mandatory">
                   {plans.map((plan, pIndex) => (
                     <motion.div key={plan.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 * pIndex }} viewport={{ once: true }} className="flex-none w-[280px] sm:w-[350px] bg-white rounded-2xl shadow-sm p-8 hover:shadow-md transition-all duration-300 border border-gray-100 snap-center">
@@ -141,7 +141,7 @@ const Home: React.FC = () => {
               </div>
 
               {/* Scroll Buttons */}
-              <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none">
+              <div className="hidden sm:flex absolute inset-x-0 top-1/2 -translate-y-1/2 justify-between pointer-events-none">
                 <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => scroll('left')} className="pointer-events-auto w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors ml-2">
                   <ChevronLeft className="w-5 h-5" />
                 </motion.button>
@@ -172,7 +172,7 @@ const Home: React.FC = () => {
         </section>
 
         {/* Get In Touch Section */}
-        <section className="py-24 bg-gray-50">
+        <section className="py-16 sm:py-20 lg:py-24 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4">
             <ContactPage heading="Get in Touch" subheading="Contact the support team at TruPower." />
           </div>

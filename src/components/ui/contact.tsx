@@ -75,7 +75,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     <section className="rounded-2xl border border-blue-100 bg-blue-50 p-6 shadow-sm md:p-10">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div className="flex flex-col justify-start lg:h-full">
-          <h1 className="max-w-lg text-4xl font-bold leading-tight text-gray-900 md:text-5xl lg:text-6xl">
+          <h1 className="max-w-lg text-3xl sm:text-4xl font-bold leading-tight text-gray-900 md:text-5xl lg:text-6xl">
             {title}
           </h1>
           <div className="mt-6 overflow-visible rounded-xl border border-blue-100/60 bg-transparent p-0 shadow-none lg:mt-auto">

@@ -52,7 +52,7 @@ const Support = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">Customer Support</h1>
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Customer Support</h1>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Get expert assistance and resources for your battery solutions
               </p>
@@ -92,19 +92,19 @@ const Support = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-white rounded-xl shadow-sm p-8 mb-16"
+              className="bg-white rounded-xl shadow-sm p-5 sm:p-8 mb-16"
             >
               <div className="flex items-center gap-3 mb-8">
                 <div className="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center">
                   <HelpCircle className="w-6 h-6 text-blue-600" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
               </div>
               
               <div className="space-y-6">
                 <details className="group">
                   <summary className="flex items-center justify-between cursor-pointer list-none p-4 rounded-lg hover:bg-gray-50">
-                    <span className="font-medium text-gray-900">What is the warranty period for your batteries?</span>
+                    <span className="font-medium text-gray-900 pr-3">What is the warranty period for your batteries?</span>
                     <span className="transition group-open:rotate-180">
                       <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
                     </span>
@@ -116,7 +116,7 @@ const Support = () => {
 
                 <details className="group">
                   <summary className="flex items-center justify-between cursor-pointer list-none p-4 rounded-lg hover:bg-gray-50">
-                    <span className="font-medium text-gray-900">How often should I service my battery?</span>
+                    <span className="font-medium text-gray-900 pr-3">How often should I service my battery?</span>
                     <span className="transition group-open:rotate-180">
                       <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
                     </span>
@@ -128,7 +128,7 @@ const Support = () => {
 
                 <details className="group">
                   <summary className="flex items-center justify-between cursor-pointer list-none p-4 rounded-lg hover:bg-gray-50">
-                    <span className="font-medium text-gray-900">What is the expected lifespan of your batteries?</span>
+                    <span className="font-medium text-gray-900 pr-3">What is the expected lifespan of your batteries?</span>
                     <span className="transition group-open:rotate-180">
                       <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
                     </span>

@@ -59,7 +59,7 @@ const BatteryDetails = () => {
         <div className="flex-grow pt-16">
           <div className="pt-24 pb-12 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 text-center">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">Battery Not Found</h1>
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Battery Not Found</h1>
               <Link to="/products" className="text-blue-600 hover:text-blue-700 text-base">
                 Return to Products
               </Link>
@@ -90,7 +90,7 @@ const BatteryDetails = () => {
             </Link>
 
             {/* Main Content */}
-            <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 max-w-6xl mx-auto">
               {/* Image Gallery */}
               <div className="space-y-8">
                 {/* Main Image */}
@@ -103,44 +103,44 @@ const BatteryDetails = () => {
                   <img
                     src={images[selectedImage].src}
                     alt={images[selectedImage].alt}
-                    className="w-full h-full object-contain p-12 transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-contain p-6 sm:p-10 lg:p-12 transition-transform duration-500 group-hover:scale-105"
                   />
                   <button 
                     onClick={() => setIsFullscreen(true)}
-                    className="absolute top-6 right-6 p-3 bg-white/90 rounded-xl shadow-sm hover:bg-white transition-colors"
+                    className="absolute top-3 right-3 sm:top-6 sm:right-6 p-2 sm:p-3 bg-white/90 rounded-xl shadow-sm hover:bg-white transition-colors"
                   >
-                    <Maximize2 className="w-6 h-6 text-gray-600" />
+                    <Maximize2 className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
                   </button>
                   {/* Navigation Arrows */}
                   <button
                     onClick={() => setSelectedImage(prev => (prev === 0 ? images.length - 1 : prev - 1))}
-                    className="absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-white/90 rounded-xl shadow-sm hover:bg-white transition-colors"
+                    className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 p-2 sm:p-3 bg-white/90 rounded-xl shadow-sm hover:bg-white transition-colors"
                   >
-                    <ChevronLeft className="w-6 h-6 text-gray-600" />
+                    <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
                   </button>
                   <button
                     onClick={() => setSelectedImage(prev => (prev === images.length - 1 ? 0 : prev + 1))}
-                    className="absolute right-6 top-1/2 -translate-y-1/2 p-3 bg-white/90 rounded-xl shadow-sm hover:bg-white transition-colors"
+                    className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 p-2 sm:p-3 bg-white/90 rounded-xl shadow-sm hover:bg-white transition-colors"
                   >
-                    <ChevronRight className="w-6 h-6 text-gray-600" />
+                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
                   </button>
                   {/* View Indicator */}
-                  <div className="absolute bottom-6 left-6 right-6 flex justify-center">
-                    <span className="px-4 py-2 bg-white/90 rounded-xl text-sm font-medium text-gray-600">
+                  <div className="absolute bottom-3 sm:bottom-6 left-3 sm:left-6 right-3 sm:right-6 flex justify-center">
+                    <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/90 rounded-xl text-xs sm:text-sm font-medium text-gray-600 text-center">
                       {images[selectedImage].label}
                     </span>
                   </div>
                 </motion.div>
 
                 {/* Thumbnails */}
-                <div className="flex gap-4 justify-center">
+                <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
                   {images.map((image, index) => (
                     <motion.button
                       key={index}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setSelectedImage(index)}
-                      className={`flex-none w-24 h-24 rounded-xl overflow-hidden border-2 transition-colors ${
+                      className={`flex-none w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border-2 transition-colors ${
                         selectedImage === index ? 'border-gray-900' : 'border-gray-100'
                       }`}
                     >
@@ -161,7 +161,7 @@ const BatteryDetails = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <h1 className="text-4xl font-bold text-gray-900 mb-6">{battery.name}</h1>
+                  <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">{battery.name}</h1>
                   <p className="text-gray-600 text-base leading-relaxed">{battery.description}</p>
                 </motion.div>
 
@@ -170,7 +170,7 @@ const BatteryDetails = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="grid grid-cols-2 gap-6"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"
                 >
                   {specifications.map((spec) => (
                     <div key={spec.label} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
@@ -192,7 +192,7 @@ const BatteryDetails = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300"
+                  className="bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300"
                 >
                   <h2 className="text-2xl font-semibold text-gray-900 mb-8">Safety Features</h2>
                   <ul className="space-y-6">

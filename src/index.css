@@ -3,9 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+  html, body, #root {
+    @apply w-full overflow-x-hidden;
+  }
+
   body {
     @apply bg-gray-50 text-gray-900;
   }
+
+  img, video, canvas, svg {
+    @apply max-w-full;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-sans tracking-tight;
   }

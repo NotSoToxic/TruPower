@@ -12,7 +12,7 @@ const Products = () => {
         <div className="flex-grow pt-16">
           <div className="pt-24 pb-12 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 text-center">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">No Products Found</h1>
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">No Products Found</h1>
               <p className="text-gray-600 text-base">Please check back later for our complete battery & EV solution.</p>
             </div>
           </div>
@@ -34,7 +34,7 @@ const Products = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">Complete Battery &amp; EV Solution</h1>
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Complete Battery &amp; EV Solution</h1>
               <p className="text-gray-600 text-base max-w-2xl mx-auto leading-relaxed">
                 Complete battery and EV solution, engineered for optimal performance as we expand our product range.
               </p>
@@ -51,7 +51,7 @@ const Products = () => {
                   viewport={{ once: true }}
                   className="group bg-white rounded-2xl overflow-hidden"
                 >
-                  <div className="grid lg:grid-cols-2 gap-12">
+                  <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
                     {/* Image Container */}
                     <div className={`relative aspect-square ${index % 2 === 1 ? 'lg:order-last' : ''}`}>
                       <img
@@ -63,10 +63,10 @@ const Products = () => {
                     
                     {/* Content */}
                     <div className="flex flex-col justify-center p-8 lg:p-0">
-                      <h3 className="text-3xl font-bold text-gray-900 mb-6">{battery.name}</h3>
+                      <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">{battery.name}</h3>
                       <p className="text-gray-600 text-base mb-8 leading-relaxed">{battery.description}</p>
                       
-                      <div className="grid grid-cols-2 gap-6 mb-8">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
                         <div className="flex items-center gap-3">
                           <div className="bg-gray-50 p-2 rounded-lg">
                             <Battery className="w-5 h-5 text-gray-600" />

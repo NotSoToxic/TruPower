@@ -39,7 +39,7 @@ const Sustainability = () => {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">Environmental Commitment</h1>
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Environmental Commitment</h1>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 Leading the transition to sustainable energy through innovative manufacturing and responsible practices.
               </p>
@@ -69,24 +69,24 @@ const Sustainability = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl p-12 mb-16"
+              className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl p-6 sm:p-10 lg:p-12 mb-16"
             >
-              <h2 className="text-3xl font-bold mb-8 text-center">Our Environmental Impact</h2>
-              <div className="grid md:grid-cols-4 gap-8">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">Our Environmental Impact</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
                 <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">95%</div>
+                  <div className="text-3xl sm:text-4xl font-bold mb-2">95%</div>
                   <p className="text-blue-100">Material Recovery</p>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">100%</div>
+                  <div className="text-3xl sm:text-4xl font-bold mb-2">100%</div>
                   <p className="text-blue-100">Renewable Energy</p>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">50M+</div>
+                  <div className="text-3xl sm:text-4xl font-bold mb-2">50M+</div>
                   <p className="text-blue-100">CO₂ Reduction (tons)</p>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">80%</div>
+                  <div className="text-3xl sm:text-4xl font-bold mb-2">80%</div>
                   <p className="text-blue-100">Water Saved</p>
                 </div>
               </div>
