@@ -64,7 +64,7 @@ export function HeroSection() {
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
           </Link>
-          <Link to="/technology">
+          <Link to="/about">
             <Button size="lg" variant="outline">
               Learn More
             </Button>
