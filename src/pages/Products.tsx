@@ -1,11 +1,26 @@
 
+import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Battery, Zap, Shield, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { batteries } from '../data/batteries';
+import GlassRadioGroup from '../components/ui/glass-radio-group';
 import Footer from '../components/Footer';
 
 const Products = () => {
+  const [selectedProductType, setSelectedProductType] = useState<'all' | 'ev-battery' | 'invertor-battery'>('all');
+
+  const groupedProducts = useMemo(
+    () => ({
+      all: batteries,
+      'ev-battery': batteries.filter((battery) => battery.category === '3-Wheeler'),
+      'invertor-battery': batteries.filter((battery) => battery.category === 'Inverter'),
+    }),
+    []
+  );
+
+  const visibleProducts = groupedProducts[selectedProductType];
+
   if (batteries.length === 0) {
     return (
       <div className="flex flex-col min-h-screen">
@@ -40,9 +55,36 @@ const Products = () => {
               </p>
             </motion.div>
 
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="max-w-5xl mx-auto mb-16"
+            >
+              <div className="rounded-3xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-6 sm:p-8 shadow-[0_14px_40px_rgba(17,24,39,0.08)]">
+                <div className="flex flex-col items-center gap-5 text-center">
+                  <div>
+                    <p className="text-sm font-medium text-gray-500">Browse by type</p>
+                    <h2 className="text-2xl font-bold text-gray-900">Select Battery Segment</h2>
+                  </div>
+                  <GlassRadioGroup
+                    className="w-full max-w-3xl"
+                    name="product-type"
+                    value={selectedProductType}
+                    onChange={(value) => setSelectedProductType(value as 'all' | 'ev-battery' | 'invertor-battery')}
+                    options={[
+                      { label: 'All', value: 'all' },
+                      { label: 'EV Battery', value: 'ev-battery' },
+                      { label: 'Invertor Battery', value: 'invertor-battery' },
+                    ]}
+                  />
+                </div>
+              </div>
+            </motion.div>
+
             {/* Products Display */}
             <div className="max-w-5xl mx-auto space-y-24">
-              {batteries.map((battery, index) => (
+              {visibleProducts.map((battery, index) => (
                 <motion.div
                   key={battery.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -107,6 +149,12 @@ const Products = () => {
                   </div>
                 </motion.div>
               ))}
+
+              {visibleProducts.length === 0 && (
+                <div className="rounded-xl border border-dashed border-gray-300 p-8 text-center text-gray-600">
+                  No products are currently available in this category.
+                </div>
+              )}
             </div>
           </div>
         </div>

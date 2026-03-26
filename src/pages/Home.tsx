@@ -153,7 +153,7 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* Trusted by Dealers / Stats Section */}
+        {/* Trusted by Dealers / Stats Section
         <section className="py-12 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="text-center mb-6">
@@ -169,7 +169,7 @@ const Home: React.FC = () => {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Get In Touch Section */}
         <section className="py-16 sm:py-20 lg:py-24 bg-gray-50">
