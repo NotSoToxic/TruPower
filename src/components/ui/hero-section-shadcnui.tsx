@@ -64,9 +64,9 @@ export function HeroSection() {
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
           </Link>
-          <Link to="/about">
+          <Link to="/about" aria-label="Learn more about TruPower Energies">
             <Button size="lg" variant="outline">
-              Learn More
+              Learn About TruPower Energies
             </Button>
           </Link>
         </motion.div>
