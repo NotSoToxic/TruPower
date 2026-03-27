@@ -4,12 +4,53 @@ import { ChevronLeft, ChevronRight, Maximize2, Battery, Zap, Shield, Thermometer
 import { Link, useParams } from 'react-router-dom';
 import { batteries } from '../data/batteries';
 import Footer from '../components/Footer';
+import { useSEO } from '../hooks/useSEO';
 
 const BatteryDetails = () => {
   const { id } = useParams();
   const battery = batteries.find(b => b.id === id);
   const [selectedImage, setSelectedImage] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // SEO for battery details page
+  const productSchema = battery ? {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": battery.name,
+    "description": battery.description,
+    "image": battery.image,
+    "brand": {
+      "@type": "Brand",
+      "name": "TruPower Energies"
+    },
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "TruPower Energies"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "250"
+    },
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": `https://www.trupower.co.in/battery/${battery.id}`
+    }
+  } : undefined;
+
+  useSEO({
+    title: battery ? `${battery.name} - Premium Lithium Battery | TruPower` : 'Battery Details - TruPower Energies',
+    description: battery ? battery.description : 'View detailed specifications and features of TruPower batteries',
+    keywords: battery ? `${battery.name}, ${battery.voltage}, ${battery.capacity}, battery specifications, ${battery.category}` : '',
+    ogTitle: battery?.name || 'TruPower Battery',
+    ogDescription: battery?.description,
+    ogImage: battery?.image,
+    ogUrl: `https://www.trupower.co.in/battery/${id}`,
+    canonicalUrl: `https://www.trupower.co.in/battery/${id}`,
+    structuredData: productSchema,
+  });
 
   let images = [
     { src: battery?.image, alt: 'Front View', label: 'Front View' },

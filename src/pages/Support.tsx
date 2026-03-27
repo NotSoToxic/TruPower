@@ -3,8 +3,19 @@ import { motion } from 'framer-motion';
 import { HelpCircle, FileText, MessageSquare, BookOpen, Phone, Mail, Clock, Wrench } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import { useSEO } from '../hooks/useSEO';
 
 const Support = () => {
+  useSEO({
+    title: 'Customer Support & Help Center - TruPower',
+    description: '24/7 customer support for TruPower batteries. Get technical assistance, troubleshooting, and product guidance from our expert support team.',
+    keywords: 'customer support, technical support, battery help, troubleshooting, customer service',
+    ogTitle: 'TruPower Customer Support',
+    ogDescription: '24/7 technical support for all your battery needs',
+    ogUrl: 'https://www.trupower.co.in/support',
+    canonicalUrl: 'https://www.trupower.co.in/support',
+  });
+
   const supportCards = [
     {
       icon: Clock,

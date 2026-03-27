@@ -2,8 +2,19 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, Zap, Shield, Battery, Leaf, BarChart, Wifi, ThermometerSun } from 'lucide-react';
 import Footer from '../components/Footer';
+import { useSEO } from '../hooks/useSEO';
 
 const Technology = () => {
+  useSEO({
+    title: 'Advanced Battery Technology - TruPower EV Solutions',
+    description: 'Discover TruPower\'s cutting-edge battery technology: Smart BMS, fast charging, thermal management, and AI-powered optimization for maximum efficiency.',
+    keywords: 'battery technology, smart BMS, LiFePO4, fast charging, thermal management, EV battery',
+    ogTitle: 'TruPower Battery Technology',
+    ogDescription: 'Advanced battery technology powering the future of electric vehicles',
+    ogUrl: 'https://www.trupower.co.in/technology',
+    canonicalUrl: 'https://www.trupower.co.in/technology',
+  });
+
   const features = [
     {
       icon: Cpu,

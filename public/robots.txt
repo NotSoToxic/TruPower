@@ -1,0 +1,22 @@
+# TruPower Energies robots.txt
+# Allow all search engines to crawl
+
+User-agent: *
+Allow: /
+
+# Specific rules for common bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Disallow private/sensitive paths (if any)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Sitemap location
+Sitemap: https://www.trupower.co.in/sitemap.xml
+
+# Crawl delay (optional - be respectful)
+# Crawl-delay: 1

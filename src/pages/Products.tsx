@@ -6,9 +6,20 @@ import { Link } from 'react-router-dom';
 import { batteries } from '../data/batteries';
 import GlassRadioGroup from '../components/ui/glass-radio-group';
 import Footer from '../components/Footer';
+import { useSEO } from '../hooks/useSEO';
 
 const Products = () => {
   const [selectedProductType, setSelectedProductType] = useState<'all' | 'ev-battery' | 'invertor-battery'>('all');
+
+  useSEO({
+    title: 'Premium EV Batteries & Inverter Solutions - TruPower Energies',
+    description: 'Browse our complete range of lithium-ion batteries for 3-wheelers, EVs, and inverters. ISO 9001 certified with 1500+ cycle life. Fast charging & thermal management.',
+    keywords: 'EV battery price, 3-wheeler battery, inverter battery, LiFePO4 battery, lithium ion battery India, battery leasing',
+    ogTitle: 'TruPower Batteries - Sustainable Energy Solutions',
+    ogDescription: 'Explore our premium battery collection with advanced BMS and safety features',
+    ogUrl: 'https://www.trupower.co.in/products',
+    canonicalUrl: 'https://www.trupower.co.in/products',
+  });
 
   const groupedProducts = useMemo(
     () => ({
@@ -75,7 +86,7 @@ const Products = () => {
                     options={[
                       { label: 'All', value: 'all' },
                       { label: 'EV Battery', value: 'ev-battery' },
-                      { label: 'Invertor Battery', value: 'invertor-battery' },
+                      { label: 'Inverter Battery', value: 'invertor-battery' },
                     ]}
                   />
                 </div>

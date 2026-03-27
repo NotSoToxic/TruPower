@@ -7,6 +7,7 @@ import { HeroSection } from '../components/ui/hero-section-shadcnui';
 import { ContactPage } from '../components/ui/contact-page';
 import { ShareholderReports, type Report } from '../components/ui/carousel';
 import { useStats } from '../context/StatsContext';
+import { useSEO } from '../hooks/useSEO';
 
 const plans = [
   {
@@ -63,6 +64,33 @@ const features = [
 ];
 
 const Home: React.FC = () => {
+  const stats = useStats().stats;
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "TruPower Energies",
+    "url": "https://www.trupower.co.in",
+    "description": "Premium lithium-ion battery solutions for electric vehicles, 3-wheelers, and inverters with ISO 9001 certification",
+    "areaServed": "IN",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Support",
+      "availableLanguageId": ["en", "hi"]
+    }
+  };
+
+  useSEO({
+    title: 'TruPower Energies - Premium EV Battery Solutions in India',
+    description: 'Discover sustainable lithium-ion batteries for electric vehicles, 3-wheelers & inverters. ISO 9001 certified. 24/7 support. Battery leasing available.',
+    keywords: 'EV battery, lithium ion battery, 3-wheeler battery, inverter battery, LiFePO4, electric rickshaw, renewable energy',
+    ogTitle: 'TruPower Energies - Energy Redefined',
+    ogDescription: 'Premium battery solutions for sustainable electric mobility',
+    ogUrl: 'https://www.trupower.co.in/',
+    canonicalUrl: 'https://www.trupower.co.in/',
+    structuredData: organizationSchema,
+  });
+
   const carouselReports: Report[] = [
     ...plans.map((plan) => ({
       id: plan.id,
@@ -79,8 +107,6 @@ const Home: React.FC = () => {
       icon: feature.icon as LucideIcon,
     })),
   ];
-
-  const stats = useStats().stats;
 
   return (
     <div className="flex flex-col min-h-screen">

@@ -1,9 +1,20 @@
 import { motion } from 'framer-motion';
 import { Battery, Users, Target, Lightbulb, Award, Globe, Leaf, Zap } from 'lucide-react';
 import Footer from '../components/Footer';
+import { useSEO } from '../hooks/useSEO';
 // Stats removed from About: StatCard/useStats are no longer used here
 
 const About = () => {
+  useSEO({
+    title: 'About TruPower Energies - Leading EV Battery Manufacturer',
+    description: 'Learn about TruPower Energies - India\'s premium lithium-ion battery manufacturer. ISO 9001 certified with focus on innovation, sustainability, and customer support.',
+    keywords: 'about TruPower, battery manufacturer India, EV technology, sustainable energy',
+    ogTitle: 'About TruPower Energies',
+    ogDescription: 'Pioneering sustainable battery solutions for electric mobility',
+    ogUrl: 'https://www.trupower.co.in/about',
+    canonicalUrl: 'https://www.trupower.co.in/about',
+  });
+
   const values = [
     {
       icon: Battery,

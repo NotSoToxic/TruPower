@@ -2,8 +2,19 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Leaf, Recycle, Factory, Award, Sun, Wind, Droplet, TreePine, Battery, Shield } from 'lucide-react';
 import Footer from '../components/Footer';
+import { useSEO } from '../hooks/useSEO';
 
 const Sustainability = () => {
+  useSEO({
+    title: 'Sustainability & Green Energy - TruPower Commitment',
+    description: 'TruPower\'s commitment to sustainability: 75% solar power, 95% battery recycling, carbon-neutral manufacturing. Eco-friendly EV solutions.',
+    keywords: 'sustainability, green energy, battery recycling, carbon neutral, eco-friendly, solar power',
+    ogTitle: 'Sustainability at TruPower',
+    ogDescription: 'Leading the way to a sustainable future with green battery technology',
+    ogUrl: 'https://www.trupower.co.in/sustainability',
+    canonicalUrl: 'https://www.trupower.co.in/sustainability',
+  });
+
   const initiatives = [
     {
       icon: Sun,
