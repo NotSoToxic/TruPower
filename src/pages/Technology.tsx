@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, Zap, Shield, Battery, Leaf, BarChart, Wifi, ThermometerSun } from 'lucide-react';
 import Footer from '../components/Footer';

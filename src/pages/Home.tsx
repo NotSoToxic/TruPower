@@ -2,11 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Battery, Zap, Shield, Headphones, ShieldCheck, Leaf, type LucideIcon } from 'lucide-react';
 import Footer from '../components/Footer';
-import StatCard from '../components/StatCard';
 import { HeroSection } from '../components/ui/hero-section-shadcnui';
 import { ContactPage } from '../components/ui/contact-page';
 import { ShareholderReports, type Report } from '../components/ui/carousel';
-import { useStats } from '../context/StatsContext';
 import { useSEO } from '../hooks/useSEO';
 
 const plans = [
@@ -64,7 +62,6 @@ const features = [
 ];
 
 const Home: React.FC = () => {
-  const stats = useStats().stats;
 
   const organizationSchema = {
     "@context": "https://schema.org",
