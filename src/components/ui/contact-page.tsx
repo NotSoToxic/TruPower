@@ -76,7 +76,7 @@ export function ContactPage({
             description="Drop by our office for a chat."
           >
             <span className="text-base font-medium break-words">
-              WeWork HQ27, Sushant Lok Phase I, Sector 27, Gurgaon, Haryana
+              DLF Forum, DLF Cybercity, Phase III, Gurugram, Haryana, 122002, India
             </span>
           </Box>
           <Box
